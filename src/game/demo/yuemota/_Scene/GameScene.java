@@ -20,6 +20,8 @@ public class GameScene extends JFrame implements KeyListener{
     private Image iBuffer;
     private Graphics gBuffer;
 
+    private static boolean isInited = false;
+
     // 读取图片资源
     public void getPic(){
         pic=new Image[10];
@@ -29,6 +31,10 @@ public class GameScene extends JFrame implements KeyListener{
 
     public void paint(Graphics g)
     {
+        if(!isInited){
+            return;
+        }
+
         if(iBuffer==null)
         {
             iBuffer=createImage(this.getSize().width,this.getSize().height);
@@ -189,6 +195,7 @@ public class GameScene extends JFrame implements KeyListener{
         this.setFocusable(true);
         this.addKeyListener(this);
         Map_Factory.initMap();
+        isInited = true;
     }
     // 重载键盘监听
     public void keyPressed(KeyEvent e)
